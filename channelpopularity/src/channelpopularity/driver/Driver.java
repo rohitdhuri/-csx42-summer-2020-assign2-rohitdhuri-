@@ -1,7 +1,12 @@
 package channelpopularity.driver;
+import channelpopularity.util.FileProcessor;
+import channelpopularity.helper.Parser;
+import channelpopularity.state.factory.SimpleStateFactory;
+import channelpopularity.state.factory.SimpleStateFactoryI;
+
 
 /**
- * @author John Doe
+ * @author Rohit Mahendra Dhuri
  *
  */
 public class Driver {
@@ -19,5 +24,20 @@ public class Driver {
 			System.exit(0);
 		}
 		System.out.println("Hello World! Lets get started with the assignment");
+
+
+		FileProcessor fp = new FileProcessor(args[0]);
+
+		//SimpleStateFactoryI ssf = new SimpleStateFactory();
+
+
+
+
+		Parser p = new Parser(fp);
+		p.process();
+
+
+
+
 	}
 }
