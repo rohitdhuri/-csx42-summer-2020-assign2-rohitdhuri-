@@ -29,22 +29,17 @@ public class Parser {
             String[] tokens = str.split("::");
             System.out.println(tokens[0] + " value is " + tokens[1]);
 
-            switch (tokens[0]) {
-                case "ADD_VIDEO":
-                    c.addVideo(tokens[1]);
-                    break;
-
-                case "REMOVE_VIDEO":
-                    c.removeVideo(tokens[1]);
-                    break;
-
-                default:
-                    break;
+            if (tokens[0].equals("ADD_VIDEO")) {
+                c.addVideo(tokens[1]);
             }
 
+            else if (tokens[0].equals("REMOVE_VIDEO")) {
+                c.removeVideo(tokens[1]);
+            }
             str = fp.poll();
         }
 
+        
     }
 
 }
