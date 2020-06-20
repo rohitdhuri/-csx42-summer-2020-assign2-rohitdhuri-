@@ -1,25 +1,30 @@
 package channelpopularity.state;
-import channelpopularity.util.VideoProperties;
+//import channelpopularity.util.data.Properties;
 import channelpopularity.context.ContextI;
+import channelpopularity.util.data.VideoData;
 
-public class Unpopular extends VideoProperties implements StateI{
+
+public class Unpopular implements StateI{
 
     private ContextI channelCObj;
+    private VideoData vd;
 
-    public Unpopular(ContextI inChannelCObj){
+    public Unpopular(ContextI inChannelCObj, VideoData inVd) {
         channelCObj = inChannelCObj;
+        vd = inVd;
         
     }
 
     @Override
     public void addVideo(String vName){
         
-        if(channelCObj.getVideoData().containsKey(vName)){
+        if(vd.getVideoData().containsKey(vName)){
             //THROWS EXCEPTION
             System.out.println("Video "+ vName + " already exists.");
             System.exit(0);
         }else{
-            channelCObj.setVideoData(vName, new VideoProperties());
+                vd.addVideo(vName);
+            //channelCObj.setVideoData(vName, new VideoProperties());
         }
 
     }

@@ -1,15 +1,17 @@
 package channelpopularity.state;
 import channelpopularity.util.VideoProperties;
+import channelpopularity.util.data.VideoData;
 import channelpopularity.context.ContextI;
 
 public class HighlyPopular implements StateI{
     
 
     private ContextI channelCObj;
+    private VideoData vd;
 
-    public HighlyPopular(ContextI inChannelCObj){
+    public HighlyPopular(ContextI inChannelCObj, VideoData inVd){
         channelCObj = inChannelCObj;
-        
+        vd = inVd;
     }
     
     @Override

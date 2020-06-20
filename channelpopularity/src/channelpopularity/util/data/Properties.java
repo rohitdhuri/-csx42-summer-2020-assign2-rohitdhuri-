@@ -1,11 +1,11 @@
-package channelpopularity.util;
+package channelpopularity.util.data;
 
-public class VideoProperties{
+public class Properties{
 
     public int views, likes, dislikes;
     public String name;
 
-    public VideoProperties() {
+    public Properties() {
         views=likes=dislikes=0;
     }
 

@@ -3,7 +3,8 @@ import channelpopularity.state.factory.SimpleStateFactoryI;
 import channelpopularity.state.StateName;
 import channelpopularity.state.Unpopular;
 import channelpopularity.state.StateI;
-import channelpopularity.util.VideoProperties;
+import channelpopularity.util.data.Properties;
+import channelpopularity.util.data.VideoData;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
@@ -11,20 +12,22 @@ import java.util.List;
 public class ChannelContext implements ContextI, StateI {
     private StateI curState;
     private Map<StateName, StateI> availableStates;
-    private Map<String, VideoProperties> videoData;
+    private VideoData vd;
+  //  private Map<String, Properties> videoData;
 
 
     public ChannelContext(SimpleStateFactoryI stateFactoryIn, List<StateName> stateNames) {
     // initialize states using factory instance and the provided state names.
     // initialize current state.
     availableStates = new HashMap<StateName, StateI>();
-    videoData = new HashMap<String, VideoProperties>();
-
+  //  videoData = new HashMap<String, Properties>();
+        vd = new VideoData();
         for(StateName state : stateNames) {
-            availableStates.put(state, stateFactoryIn.create(state, this));
+            availableStates.put(state, stateFactoryIn.create(state, this, vd));
         }
 
         curState = availableStates.get(StateName.UNPOPULAR);
+
     }
 
     // Called by the States based on their logic of what the machine state should change to.
@@ -33,16 +36,16 @@ public class ChannelContext implements ContextI, StateI {
             curState = availableStates.get(nextState);
         }
     }
-
-    public void setVideoData(String vName, VideoProperties vp){
+/*
+    public void setVideoData(String vName, Properties vp){
         videoData.put(vName, vp);
         System.out.println("\n videos hashmap "+ videoData);
     }
 
-    public Map<String, VideoProperties> getVideoData(){
+    public Map<String, Properties> getVideoData(){
         return videoData;
     }
-
+*/
     public void addVideo(String vName){
         curState.addVideo(vName);
     }
@@ -56,12 +59,6 @@ public class ChannelContext implements ContextI, StateI {
         curState.metrics();
     }
 
-
-    public void accessMap(int v, int l, int d)
-    {
-        
-
-    }
 
 
 }

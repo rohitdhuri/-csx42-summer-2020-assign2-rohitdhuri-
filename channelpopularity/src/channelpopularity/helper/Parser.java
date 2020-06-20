@@ -31,6 +31,8 @@ public class Parser{
             
             switch (tokens[0]){
             case "ADD_VIDEO": c.addVideo(tokens[1]); break;
+
+            default: break;
             }
 
 			str= fp.poll();
