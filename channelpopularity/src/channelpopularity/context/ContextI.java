@@ -1,6 +1,5 @@
 package channelpopularity.context;
 import channelpopularity.state.StateName;
-import channelpopularity.state.StateI;
 import channelpopularity.util.VideoProperties;
 import java.util.Map;
 

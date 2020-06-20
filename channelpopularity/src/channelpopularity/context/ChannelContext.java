@@ -1,6 +1,7 @@
 package channelpopularity.context;
 import channelpopularity.state.factory.SimpleStateFactoryI;
 import channelpopularity.state.StateName;
+import channelpopularity.state.Unpopular;
 import channelpopularity.state.StateI;
 import channelpopularity.util.VideoProperties;
 import java.util.Map;
@@ -22,6 +23,8 @@ public class ChannelContext implements ContextI, StateI {
         for(StateName state : stateNames) {
             availableStates.put(state, stateFactoryIn.create(state, this));
         }
+
+        curState = availableStates.get(StateName.UNPOPULAR);
     }
 
     // Called by the States based on their logic of what the machine state should change to.
