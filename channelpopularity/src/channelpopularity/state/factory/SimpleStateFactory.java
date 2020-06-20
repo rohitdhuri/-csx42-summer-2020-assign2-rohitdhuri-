@@ -4,33 +4,29 @@ import channelpopularity.state.Unpopular;
 import channelpopularity.state.MildlyPopular;
 import channelpopularity.state.HighlyPopular;
 import channelpopularity.state.UltraPopular;
-
+import channelpopularity.state.StateI;
+import channelpopularity.context.ContextI;
 
 
 public class SimpleStateFactory implements SimpleStateFactoryI {
 
 
-    public StateI create(StateName state){
-        StateI state = null;
+    public StateI create(StateName state, ContextI channelCObj){
         switch (state) {
             case UNPOPULAR:
-            state = new Unpopular();
-            return state;
+            return new Unpopular(channelCObj);
 
             case MILDLY_POPULAR:
-            state = new MildlyPopular();
-            return state;
+            return new MildlyPopular(channelCObj);
 
             case HIGHLY_POPULAR:
-            state = new HighlyPopular();
-            return state;
+            return new HighlyPopular(channelCObj);
 
             case ULTRA_POPULAR:
-            state = new UltraPopular();
-            return state;
+            return new UltraPopular(channelCObj);
 
             default: 
-            return state;
+            return null;
         }
 
     }

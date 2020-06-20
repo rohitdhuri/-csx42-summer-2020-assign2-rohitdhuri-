@@ -1,14 +1,19 @@
 package channelpopularity.helper;
 import channelpopularity.util.FileProcessor;
+import channelpopularity.context.ContextI;
+import channelpopularity.context.ChannelContext;
 import java.io.IOException;
+import channelpopularity.state.StateI;
 
 public class Parser{
 
     FileProcessor fp;
+    StateI c;
 
-    public Parser(FileProcessor inFp){
+    public Parser(FileProcessor inFp, StateI inC){
 
         fp = inFp;
+        c = inC;
     }
 
 /**
@@ -23,7 +28,10 @@ public class Parser{
 		while(str!= null){			
 			String[] tokens = str.split("::");		
 			System.out.println(tokens[0] + " value is " + tokens[1]);
-			
+            
+            switch (tokens[0]){
+            case "ADD_VIDEO": c.addVideo(tokens[1]); break;
+            }
 
 			str= fp.poll();
 		} 

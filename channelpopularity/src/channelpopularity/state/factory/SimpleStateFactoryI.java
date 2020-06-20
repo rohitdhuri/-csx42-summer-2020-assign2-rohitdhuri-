@@ -1,6 +1,11 @@
 package channelpopularity.state.factory;
 
+import channelpopularity.state.StateName;
+import channelpopularity.context.ContextI;
+
+import channelpopularity.state.StateI;
+
 public interface SimpleStateFactoryI {
 
-    void create();
+    public StateI create(StateName state, ContextI channelCObj);
 }

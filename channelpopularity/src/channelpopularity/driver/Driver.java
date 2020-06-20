@@ -3,6 +3,11 @@ import channelpopularity.util.FileProcessor;
 import channelpopularity.helper.Parser;
 import channelpopularity.state.factory.SimpleStateFactory;
 import channelpopularity.state.factory.SimpleStateFactoryI;
+import channelpopularity.state.StateI;
+import channelpopularity.state.StateName;
+import channelpopularity.context.ChannelContext;
+import channelpopularity.context.ContextI;
+import java.util.Arrays;
 
 
 /**
@@ -23,17 +28,15 @@ public class Driver {
 			System.err.printf("Error: Incorrect number of arguments. Program accepts %d arguments.", REQUIRED_NUMBER_OF_CMDLINE_ARGS);
 			System.exit(0);
 		}
-		System.out.println("Hello World! Lets get started with the assignment");
 
 
 		FileProcessor fp = new FileProcessor(args[0]);
 
-		//SimpleStateFactoryI ssf = new SimpleStateFactory();
+		SimpleStateFactoryI ssf = new SimpleStateFactory();
 
+		StateI c = new ChannelContext(ssf, Arrays.asList(StateName.values()));
 
-
-
-		Parser p = new Parser(fp);
+		Parser p = new Parser(fp, c);
 		p.process();
 
 
