@@ -2,6 +2,7 @@ package channelpopularity.state;
 
 import channelpopularity.context.ContextI;
 import channelpopularity.util.data.VideoData;
+import channelpopularity.state.StateName;
 
 public class Unpopular implements StateI {
 
@@ -41,7 +42,16 @@ public class Unpopular implements StateI {
     }
 
     @Override
-    public void metrics() {
-    }
+    public void metrics(String vName, Integer views, Integer likes, Integer dislikes) {
+        vd.setMetrics(vName, views, likes, dislikes);
+        int pScore = vd.getPopularityScore(vName);
 
+        if (pScore >= 1000 && pScore <= 10000) {
+            channelCObj.setCurrentState(StateName.MILDLY_POPULAR);
+        } else if (pScore >= 10001 && pScore <= 100000) {
+            channelCObj.setCurrentState(StateName.HIGHLY_POPULAR);
+        } else if (pScore >= 100001 && pScore <= Integer.MAX_VALUE) {
+            channelCObj.setCurrentState(StateName.ULTRA_POPULAR);
+        }else{}
+    }
 }

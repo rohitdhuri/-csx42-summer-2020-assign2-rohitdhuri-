@@ -40,7 +40,17 @@ public class MildlyPopular implements StateI {
     }
 
     @Override
-    public void metrics() {
+    public void metrics(String vName, Integer views, Integer likes, Integer dislikes) {
+        vd.setMetrics(vName, views, likes, dislikes);
+        int pScore = vd.getPopularityScore(vName);
+
+        if (pScore >= 0 && pScore <= 1000) {
+            channelCObj.setCurrentState(StateName.UNPOPULAR);
+        } else if (pScore >= 10001 && pScore <= 100000) {
+            channelCObj.setCurrentState(StateName.HIGHLY_POPULAR);
+        } else if (pScore >= 100001 && pScore <= Integer.MAX_VALUE) {
+            channelCObj.setCurrentState(StateName.ULTRA_POPULAR);
+        }else{}
     }
 
 }

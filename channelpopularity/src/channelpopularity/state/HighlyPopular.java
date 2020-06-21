@@ -1,18 +1,18 @@
 package channelpopularity.state;
+
 import channelpopularity.util.data.VideoData;
 import channelpopularity.context.ContextI;
 
-public class HighlyPopular implements StateI{
-    
+public class HighlyPopular implements StateI {
 
     private ContextI channelCObj;
     private VideoData vd;
 
-    public HighlyPopular(ContextI inChannelCObj, VideoData inVd){
+    public HighlyPopular(ContextI inChannelCObj, VideoData inVd) {
         channelCObj = inChannelCObj;
         vd = inVd;
     }
-    
+
     @Override
     public void addVideo(String vName) {
         if (vd.getVideoData().containsKey(vName)) {
@@ -34,9 +34,23 @@ public class HighlyPopular implements StateI{
             System.exit(0);
         }
     }
-    @Override
-    public void adRequest(){}
-    @Override
-    public void metrics(){}
 
+    @Override
+    public void adRequest() {
+    }
+
+    @Override
+    public void metrics(String vName, Integer views, Integer likes, Integer dislikes) {
+        vd.setMetrics(vName, views, likes, dislikes);
+        int pScore = vd.getPopularityScore(vName);
+
+        if (pScore >= 0 && pScore <= 1000) {
+            channelCObj.setCurrentState(StateName.UNPOPULAR);
+        } else if (pScore >= 1000 && pScore <= 10000) {
+            channelCObj.setCurrentState(StateName.MILDLY_POPULAR);
+        } else if (pScore >= 100001 && pScore <= Integer.MAX_VALUE) {
+            channelCObj.setCurrentState(StateName.ULTRA_POPULAR);
+        }else{}
+
+    }
 }

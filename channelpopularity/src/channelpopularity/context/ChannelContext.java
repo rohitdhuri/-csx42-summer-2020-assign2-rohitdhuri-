@@ -50,8 +50,8 @@ public class ChannelContext implements ContextI, StateI {
         curState.adRequest();
     }
 
-    public void metrics() {
-        curState.metrics();
+    public void metrics(String vName, Integer views, Integer likes, Integer dislikes) {
+        curState.metrics(vName, views, likes, dislikes);
     }
 
 }
