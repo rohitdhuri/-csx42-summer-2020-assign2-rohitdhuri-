@@ -17,6 +17,7 @@ public abstract class AbstractState implements StateI {
           //  System.out.println("\n videos hashmap " + c.getVideoData());
         }
         c.updateChannelPopularity();
+        c.updateState();
 
     }
 
@@ -33,11 +34,12 @@ public abstract class AbstractState implements StateI {
             System.exit(0);
         }
         c.updateChannelPopularity();
+        c.updateState();
     }
 
     @Override
     public void metrics(String vName, Integer views, Integer likes, Integer dislikes, ChannelContext c) {
-        System.out.println(c.getCurrentState()+"__POPULARITY_SCORE_UPDATE::"+c.channelPopularityScore);
+
         if (c.getVideoData().containsKey(vName)) {
             c.getVideoData().get(vName).set(views, likes, dislikes);
             c.getVideoData().get(vName).calPopularityScoreVideo();
@@ -47,6 +49,9 @@ public abstract class AbstractState implements StateI {
         }
 
         c.updateChannelPopularity();
+        System.out.println(c.getCurrentState()+"__POPULARITY_SCORE_UPDATE::"+c.channelPopularityScore);
+        c.updateState();
+
     }
 
 }

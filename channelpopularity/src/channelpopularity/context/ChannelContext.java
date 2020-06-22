@@ -56,12 +56,14 @@ public class ChannelContext implements ContextI {
             sum += entry.getValue().popularityScore;
             i++;
         }
-
         if (i > 0) {
             channelPopularityScore = sum / i;
         } else {
             channelPopularityScore = 0;
         }
+    }
+
+    public void updateState() {
 
         if (channelPopularityScore >= 0 && channelPopularityScore <= 1000) {
             setCurrentState(StateName.UNPOPULAR);
