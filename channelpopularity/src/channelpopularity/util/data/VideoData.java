@@ -29,7 +29,7 @@ public class VideoData {
         }
 
         p.set(views, likes, dislikes);
-        p.calPopularityScore();
+        p.calPopularityScoreVideo();
         System.out.println(p.views +" "+ p.likes +" "+ p.dislikes +" "+ p.popularityScore);
     }
 

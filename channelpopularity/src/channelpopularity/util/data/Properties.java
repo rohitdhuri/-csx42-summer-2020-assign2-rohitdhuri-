@@ -16,7 +16,7 @@ public class Properties{
 
     }
 
-    public void calPopularityScore(){
+    public void calPopularityScoreVideo(){
        this.popularityScore = views+2*(likes-dislikes);
     }
 

@@ -1,4 +1,5 @@
 package channelpopularity.helper;
+
 import channelpopularity.util.FileProcessor;
 import channelpopularity.context.ContextI;
 import channelpopularity.operation.Operation;
@@ -11,9 +12,9 @@ import java.util.HashMap;
 public class Parser {
 
     FileProcessor fp;
-    StateI c;
+    ContextI c;
 
-    public Parser(FileProcessor inFp, StateI inC) {
+    public Parser(FileProcessor inFp, ContextI inC) {
 
         fp = inFp;
         c = inC;
@@ -29,7 +30,6 @@ public class Parser {
         String str = fp.poll();
         String values, vName, operation;
         Map<String, Integer> metricsValues = new HashMap<String, Integer>();
-
 
         while (str != null) {
             String[] tokens = str.split("::");
@@ -61,13 +61,8 @@ public class Parser {
                 }
 
                 c.metrics(vName, metricsValues.get("VIEWS"), metricsValues.get("LIKES"), metricsValues.get("DISLIKES"));
-                System.out.println("Here");
             }
-
             str = fp.poll();
-
         }
-
     }
-
 }

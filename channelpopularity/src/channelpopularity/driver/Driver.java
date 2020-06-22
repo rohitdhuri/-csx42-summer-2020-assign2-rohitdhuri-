@@ -34,7 +34,7 @@ public class Driver {
 
 		SimpleStateFactoryI ssf = new SimpleStateFactory();
 
-		StateI c = new ChannelContext(ssf, Arrays.asList(StateName.values()));
+		ContextI c = new ChannelContext(ssf, Arrays.asList(StateName.values()));
 
 		Parser p = new Parser(fp, c);
 		p.process();

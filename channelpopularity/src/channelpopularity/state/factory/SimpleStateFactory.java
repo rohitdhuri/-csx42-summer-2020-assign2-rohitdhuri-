@@ -12,19 +12,19 @@ import channelpopularity.context.ContextI;
 public class SimpleStateFactory implements SimpleStateFactoryI {
 
 
-    public StateI create(StateName state, ContextI channelCObj, VideoData vd){
+    public StateI create(StateName state){
         switch (state) {
             case UNPOPULAR:
-            return new Unpopular(channelCObj, vd);
+            return new Unpopular();
 
             case MILDLY_POPULAR:
-            return new MildlyPopular(channelCObj, vd);
+            return new MildlyPopular();
 
             case HIGHLY_POPULAR:
-            return new HighlyPopular(channelCObj, vd);
+            return new HighlyPopular();
 
             case ULTRA_POPULAR:
-            return new UltraPopular(channelCObj, vd);
+            return new UltraPopular();
 
             default: 
             return null;

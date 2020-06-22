@@ -8,5 +8,5 @@ import channelpopularity.state.StateI;
 
 public interface SimpleStateFactoryI {
 
-    public StateI create(StateName state, ContextI channelCObj, VideoData vd);
+    public StateI create(StateName state);
 }
