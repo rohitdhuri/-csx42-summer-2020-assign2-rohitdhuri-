@@ -4,27 +4,29 @@ import channelpopularity.state.factory.SimpleStateFactoryI;
 import channelpopularity.state.StateName;
 import channelpopularity.state.Unpopular;
 import channelpopularity.state.StateI;
-import channelpopularity.state.AbstractState;
 import channelpopularity.util.data.Properties;
 import channelpopularity.util.data.VideoData;
 import java.util.Map;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
+import channelpopularity.util.Results;
 
 public class ChannelContext implements ContextI {
     private StateI curState;
     private Map<StateName, StateI> availableStates;
     private Map<String, Properties> videoData;
     public Integer channelPopularityScore;
+    public Results result;
     // private Map<String, Properties> videoData;
 
-    public ChannelContext(final SimpleStateFactoryI stateFactoryIn, final List<StateName> stateNames) {
+    public ChannelContext(final SimpleStateFactoryI stateFactoryIn, final List<StateName> stateNames, Results inResult) {
         // initialize states using factory instance and the provided state names.
         // initialize current state.
+
         availableStates = new HashMap<StateName, StateI>();
         videoData = new HashMap<String, Properties>();
 
+        result = inResult;
         // videoData = new HashMap<String, Properties>();
         for (final StateName state : stateNames) {
             availableStates.put(state, stateFactoryIn.create(state));
@@ -78,19 +80,19 @@ public class ChannelContext implements ContextI {
     }
 
     public void addVideo(final String vName) {
-        curState.addVideo(vName, this);
+        curState.addVideo(vName, this, result);
     }
 
     public void removeVideo(final String vName) {
-        curState.removeVideo(vName, this);
+        curState.removeVideo(vName, this, result);
     }
 
     public void adRequest(String vName, Integer length) {
-        curState.adRequest(vName, length, this);
+        curState.adRequest(vName, length, this, result);
     }
 
     public void metrics(final String vName, final Integer views, final Integer likes, final Integer dislikes) {
-        curState.metrics(vName, views, likes, dislikes, this);
+        curState.metrics(vName, views, likes, dislikes, this, result);
 
     }
 

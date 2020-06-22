@@ -1,20 +1,21 @@
 package channelpopularity.state;
 
-import channelpopularity.state.StateName;
 import channelpopularity.context.ChannelContext;
+import channelpopularity.util.Results;
 import channelpopularity.util.data.Properties;
 
 public abstract class AbstractState implements StateI {
+    
     @Override
-    public void addVideo(String vName, ChannelContext c) {
-        System.out.println(c.getCurrentState()+"__VIDEO_ADDED::"+vName);
+    public void addVideo(String vName, ChannelContext c, Results result) {
+        result.storeOutput(c.getCurrentState() + "__VIDEO_ADDED::" + vName+"\n");
         if (c.getVideoData().containsKey(vName)) {
             // THROWS EXCEPTION
             System.out.println("Video " + vName + " already exists.\n exiting..");
             System.exit(0);
         } else {
             c.getVideoData().put(vName, new Properties());
-          //  System.out.println("\n videos hashmap " + c.getVideoData());
+            // System.out.println("\n videos hashmap " + c.getVideoData());
         }
         c.updateChannelPopularity();
         c.updateState();
@@ -22,11 +23,12 @@ public abstract class AbstractState implements StateI {
     }
 
     @Override
-    public void removeVideo(String vName, ChannelContext c) {
-        System.out.println(c.getCurrentState()+"__VIDEO_REMOVED::"+vName);
+    public void removeVideo(String vName, ChannelContext c, Results result) {
+        result.storeOutput(c.getCurrentState() + "__VIDEO_REMOVED::" + vName+"\n"); 
         if (c.getVideoData().containsKey(vName)) {
             c.getVideoData().remove(vName);
-       //     System.out.println("\n videos hashmap " + c.getVideoData() + " "+ c.channelPopularityScore);
+            // System.out.println("\n videos hashmap " + c.getVideoData() + " "+
+            // c.channelPopularityScore);
 
         } else {
             // Throw Exception
@@ -38,7 +40,7 @@ public abstract class AbstractState implements StateI {
     }
 
     @Override
-    public void metrics(String vName, Integer views, Integer likes, Integer dislikes, ChannelContext c) {
+    public void metrics(String vName, Integer views, Integer likes, Integer dislikes, ChannelContext c, Results result) {
 
         if (c.getVideoData().containsKey(vName)) {
             c.getVideoData().get(vName).set(views, likes, dislikes);
@@ -49,7 +51,7 @@ public abstract class AbstractState implements StateI {
         }
 
         c.updateChannelPopularity();
-        System.out.println(c.getCurrentState()+"__POPULARITY_SCORE_UPDATE::"+c.channelPopularityScore);
+        result.storeOutput(c.getCurrentState() + "__POPULARITY_SCORE_UPDATE::" + c.channelPopularityScore+"\n");
         c.updateState();
 
     }

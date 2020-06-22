@@ -3,16 +3,17 @@ package channelpopularity.state;
 import channelpopularity.util.data.VideoData;
 import channelpopularity.context.ChannelContext;
 import channelpopularity.context.ContextI;
+import channelpopularity.util.Results;
 
 public class HighlyPopular extends AbstractState{
 
 
     @Override
-    public void adRequest(String vName, Integer length,ChannelContext c) {
+    public void adRequest(String vName, Integer length,ChannelContext c, Results result) {
         if(length >= 1 && length <= 30){
-            System.out.println(c.getCurrentState()+"__AD_REQUEST::APPROVED");
+            result.storeOutput(c.getCurrentState()+"__AD_REQUEST::APPROVED"+"\n");
         } else{
-            System.out.println(c.getCurrentState()+"__AD_REQUEST::REJECTED");
+            result.storeOutput(c.getCurrentState()+"__AD_REQUEST::REJECTED"+"\n");
         }
     }
 

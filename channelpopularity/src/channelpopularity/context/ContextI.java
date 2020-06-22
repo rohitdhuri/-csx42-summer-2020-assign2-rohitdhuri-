@@ -1,8 +1,8 @@
 package channelpopularity.context;
 
-import channelpopularity.state.StateI;
 import channelpopularity.state.StateName;
 import channelpopularity.util.data.Properties;
+import channelpopularity.util.Results;
 import java.util.Map;
 
 public interface ContextI {
