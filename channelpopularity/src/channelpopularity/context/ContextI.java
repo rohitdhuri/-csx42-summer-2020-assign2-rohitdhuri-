@@ -16,6 +16,7 @@ public interface ContextI {
   public void addVideo(String vName);
   public void removeVideo(String vName);
   public void metrics(String vName, Integer views, Integer likes, Integer dislikes);
-  public void adRequest();
+  public void adRequest(String vName, Integer length);
+  void updateChannelPopularity();
 
 }

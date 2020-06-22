@@ -50,14 +50,18 @@ public class ChannelContext implements ContextI {
         return null;
     }
 
-    public void updateChannelPopularity(){
+    public void updateChannelPopularity() {
         int sum = 0, i = 0;
         for (Map.Entry<String, Properties> entry : videoData.entrySet()) {
             sum += entry.getValue().popularityScore;
             i++;
         }
-        channelPopularityScore = sum / i;
-        System.out.println(channelPopularityScore);
+
+        if (i > 0) {
+            channelPopularityScore = sum / i;
+        } else {
+            channelPopularityScore = 0;
+        }
 
         if (channelPopularityScore >= 0 && channelPopularityScore <= 1000) {
             setCurrentState(StateName.UNPOPULAR);
@@ -79,13 +83,12 @@ public class ChannelContext implements ContextI {
         curState.removeVideo(vName, this);
     }
 
-    public void adRequest() {
-        curState.adRequest(this);
+    public void adRequest(String vName, Integer length) {
+        curState.adRequest(vName, length, this);
     }
 
     public void metrics(final String vName, final Integer views, final Integer likes, final Integer dislikes) {
         curState.metrics(vName, views, likes, dislikes, this);
-        
 
     }
 

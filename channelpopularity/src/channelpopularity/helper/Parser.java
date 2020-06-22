@@ -33,7 +33,7 @@ public class Parser {
 
         while (str != null) {
             String[] tokens = str.split("::");
-            System.out.println(tokens[0] + " value is " + tokens[1]);
+          //  System.out.println(tokens[0] + " value is " + tokens[1]);
 
             if (tokens[0].contains("__")) {
                 operation = tokens[0].split("__")[0];
@@ -62,6 +62,12 @@ public class Parser {
 
                 c.metrics(vName, metricsValues.get("VIEWS"), metricsValues.get("LIKES"), metricsValues.get("DISLIKES"));
             }
+
+            else if (operation.equals(Operation.AD_REQUEST.getConstantValue())){
+                String[] pairs = tokens[1].split("=");
+                c.adRequest(vName, Integer.parseInt(pairs[1]));
+            }
+
             str = fp.poll();
         }
     }

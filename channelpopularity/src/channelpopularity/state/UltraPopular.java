@@ -9,7 +9,13 @@ public class UltraPopular extends AbstractState {
 
 
     @Override
-    public void adRequest(ChannelContext c) {
+    public void adRequest(String vName, Integer length,ChannelContext c) {
+        if(length >= 1 && length <= 40){
+            System.out.println(c.getCurrentState()+"__AD_REQUEST::APPROVED");
+        } else{
+            System.out.println(c.getCurrentState()+"__AD_REQUEST::REJECTED");
+        }
+
     }
 
 
