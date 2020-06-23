@@ -1,12 +1,10 @@
 package channelpopularity.state.factory;
 import channelpopularity.state.StateName;
 import channelpopularity.state.Unpopular;
-import channelpopularity.util.data.VideoData;
 import channelpopularity.state.MildlyPopular;
 import channelpopularity.state.HighlyPopular;
 import channelpopularity.state.UltraPopular;
 import channelpopularity.state.StateI;
-import channelpopularity.context.ContextI;
 
 
 public class SimpleStateFactory implements SimpleStateFactoryI {

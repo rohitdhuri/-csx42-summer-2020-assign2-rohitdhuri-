@@ -1,14 +1,23 @@
 package channelpopularity.driver;
 
+import channelpopularity.util.FileDisplayInterface;
 import channelpopularity.util.FileProcessor;
 import channelpopularity.helper.Parser;
 import channelpopularity.state.factory.SimpleStateFactory;
 import channelpopularity.state.factory.SimpleStateFactoryI;
-import channelpopularity.state.StateI;
 import channelpopularity.state.StateName;
 import channelpopularity.context.ChannelContext;
 import channelpopularity.context.ContextI;
 import channelpopularity.util.Results;
+import channelpopularity.util.StdoutDisplayInterface;
+import channelpopularity.util.exception.EmptyFileException;
+import channelpopularity.util.exception.InvalidInputFormat;
+import channelpopularity.util.exception.NegativeLikesOrDislikes;
+import channelpopularity.util.exception.NegativeValueOfViews;
+import channelpopularity.util.exception.VideoAlreadyExists;
+import channelpopularity.util.exception.VideoNotFound;
+
+import java.io.FileNotFoundException;
 import java.util.Arrays;
 
 /**
@@ -31,18 +40,26 @@ public class Driver {
 			System.exit(0);
 		}
 
-		FileProcessor fp = new FileProcessor(args[0]);
+		try {
+			FileProcessor fp = new FileProcessor(args[0]);
 
-		SimpleStateFactoryI ssf = new SimpleStateFactory();
+			SimpleStateFactoryI ssf = new SimpleStateFactory();
 
-		Results result = new Results(args[1]);
+			Results result = new Results(args[1]);
 
-		ContextI c = new ChannelContext(ssf, Arrays.asList(StateName.values()), result);
+			ContextI c = new ChannelContext(ssf, Arrays.asList(StateName.values()), result);
 
-		Parser p = new Parser(fp, c);
-		p.process();
+			Parser p = new Parser(fp, c);
+			p.process();
 
-		result.writeToStdout();
-		result.writeToFile();
+			StdoutDisplayInterface stdi = result;
+			FileDisplayInterface fdi = result;
+
+			stdi.writeToStdout();
+			fdi.writeToFile();
+		} catch (NegativeLikesOrDislikes | NegativeValueOfViews | VideoAlreadyExists | VideoNotFound
+				| EmptyFileException | InvalidInputFormat | NumberFormatException | FileNotFoundException e) {
+			System.err.println(e.getMessage());
+		}
 	}
 }

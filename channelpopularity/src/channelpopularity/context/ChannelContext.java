@@ -2,10 +2,13 @@ package channelpopularity.context;
 
 import channelpopularity.state.factory.SimpleStateFactoryI;
 import channelpopularity.state.StateName;
-import channelpopularity.state.Unpopular;
 import channelpopularity.state.StateI;
 import channelpopularity.util.data.Properties;
-import channelpopularity.util.data.VideoData;
+import channelpopularity.util.exception.NegativeValueOfViews;
+import channelpopularity.util.exception.VideoAlreadyExists;
+import channelpopularity.util.exception.VideoNotFound;
+import channelpopularity.util.exception.NegativeLikesOrDislikes;
+
 import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
@@ -79,11 +82,11 @@ public class ChannelContext implements ContextI {
         }
     }
 
-    public void addVideo(final String vName) {
+    public void addVideo(final String vName) throws VideoAlreadyExists {
         curState.addVideo(vName, this, result);
     }
 
-    public void removeVideo(final String vName) {
+    public void removeVideo(final String vName) throws VideoNotFound {
         curState.removeVideo(vName, this, result);
     }
 
@@ -91,7 +94,7 @@ public class ChannelContext implements ContextI {
         curState.adRequest(vName, length, this, result);
     }
 
-    public void metrics(final String vName, final Integer views, final Integer likes, final Integer dislikes) {
+    public void metrics(final String vName, final Integer views, final Integer likes, final Integer dislikes) throws NegativeValueOfViews, NegativeLikesOrDislikes, VideoNotFound{
         curState.metrics(vName, views, likes, dislikes, this, result);
 
     }

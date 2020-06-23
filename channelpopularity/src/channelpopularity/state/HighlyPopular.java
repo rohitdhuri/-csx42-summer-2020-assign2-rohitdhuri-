@@ -1,8 +1,6 @@
 package channelpopularity.state;
 
-import channelpopularity.util.data.VideoData;
 import channelpopularity.context.ChannelContext;
-import channelpopularity.context.ContextI;
 import channelpopularity.util.Results;
 
 public class HighlyPopular extends AbstractState{
