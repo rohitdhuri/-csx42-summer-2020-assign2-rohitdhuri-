@@ -91,6 +91,11 @@ public class ChannelContext implements ContextI {
         } else {
             channelPopularityScore = 0;
         }
+
+        if (channelPopularityScore < 0){
+            channelPopularityScore = 0;
+        }
+
     }
 
     /**
