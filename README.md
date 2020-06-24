@@ -1,9 +1,9 @@
 # CSX42: Assignment 2
-**Name:**
+## Name: Rohit Mahendra Dhuri
 
 -----------------------------------------------------------------------
 
-Following are the commands and the instructions to run ANT on your project.
+Following are the commands and the instructions to run ANT on this project.
 
 
 Note: build.xml is present in [channelpopularity/src](./channelpopularity/src/) folder.
@@ -33,6 +33,19 @@ Note: Arguments accept the absolute path of the files.
 
 
 ## Description:
+1. Assumption
+Absolute path of the input file is provided.
+All the operations that need to be performed are according to the given input format.
+There are no spaces before or after the comma character.
+Views, Likes and Dislikes are integers. 
+Advertisement length is an integer.
+
+2. Data Structures
+Hashmaps have been used for storing video names with their respective details.
+Strings have been used as buffers.
+
+3. Code Working
+Input file is read and processed one line at a time. After an operation is performed, popularity score is updated and according to that the state is switched. This continues until the last line in input file.
 
 
 ## Academic Honesty statement:
@@ -43,6 +56,6 @@ I am involved in plagiarism or cheating an official form will be
 submitted to the Academic Honesty Committee of the Watson School to
 determine the action that needs to be taken. "
 
-Date: [ADD_DATE_HERE]
+Date: [06/24/2020]
 
 
