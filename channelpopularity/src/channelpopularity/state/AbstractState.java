@@ -10,6 +10,18 @@ import channelpopularity.util.exception.VideoNotFound;
 
 public abstract class AbstractState implements StateI {
 
+    /**
+     * Class AbstractState Defines the common operations for each state
+     * 
+     * @author - Rohit Mahendra Dhuri
+     */
+
+    /**
+     * Adds the video
+     * 
+     * @param - String containing the name of a video, ChannelConetxt object and
+     *          results object
+     */
     @Override
     public void addVideo(String vName, ChannelContext c, Results result) throws VideoAlreadyExists {
         result.storeOutput(c.getCurrentState() + "__VIDEO_ADDED::" + vName + "\n");
@@ -23,6 +35,12 @@ public abstract class AbstractState implements StateI {
 
     }
 
+    /**
+     * This function removes a video
+     * 
+     * @param - Name of the video to be removed, ChannelConetxt object and results
+     *          object
+     */
     @Override
     public void removeVideo(String vName, ChannelContext c, Results result) throws VideoNotFound {
         result.storeOutput(c.getCurrentState() + "__VIDEO_REMOVED::" + vName + "\n");
@@ -35,9 +53,15 @@ public abstract class AbstractState implements StateI {
         c.updateState();
     }
 
+    /**
+     * This function updates the metrics of any video
+     * 
+     * @param - A string containing name of video and three integer values: views,
+     *          likes and dislikes. Also ChannelConetxt object and results object.
+     */
     @Override
-    public void metrics(String vName, Integer views, Integer likes, Integer dislikes, ChannelContext c,
-            Results result) throws NegativeValueOfViews, NegativeLikesOrDislikes, VideoNotFound {
+    public void metrics(String vName, Integer views, Integer likes, Integer dislikes, ChannelContext c, Results result)
+            throws NegativeValueOfViews, NegativeLikesOrDislikes, VideoNotFound {
 
         if (views < 0) {
             throw new NegativeValueOfViews("Negative value for number of views in an input line");
