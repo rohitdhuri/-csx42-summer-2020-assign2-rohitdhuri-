@@ -42,6 +42,10 @@ public class Properties {
      */
     public void calPopularityScoreVideo() {
         this.popularityScore = views + 2 * (likes - dislikes);
+        if(this.popularityScore<0)
+        {
+            popularityScore=0;
+        }
     }
 
     @Override
