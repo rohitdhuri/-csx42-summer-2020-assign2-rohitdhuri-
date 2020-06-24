@@ -16,4 +16,5 @@ public interface FileDisplayInterface {
 	 * 
 	 */
 	public void writeToFile() throws IOException;
+
 }

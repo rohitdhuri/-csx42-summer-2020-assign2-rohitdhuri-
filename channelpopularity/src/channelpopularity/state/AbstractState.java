@@ -80,4 +80,9 @@ public abstract class AbstractState implements StateI {
 
     }
 
+    @Override
+    public String toString() {
+        return "Class: AbstractState, Data Members: [ ]";
+    }
+
 }

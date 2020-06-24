@@ -60,7 +60,6 @@ public class Results implements FileDisplayInterface, StdoutDisplayInterface {
 
     @Override
     public String toString() {
-        return "output= " + output + " filePath= " + filePath;
+        return "Class: Results, Data Members: [output= " + output + " filePath= " + filePath + "]";
     }
-
 }

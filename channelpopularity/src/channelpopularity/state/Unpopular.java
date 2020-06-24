@@ -25,4 +25,9 @@ public class Unpopular extends AbstractState {
             result.storeOutput(c.getCurrentState() + "__AD_REQUEST::REJECTED" + "\n");
         }
     }
+
+    @Override
+    public String toString() {
+        return "Class: Unpopular, Data Members: [ ]";
+    }
 }

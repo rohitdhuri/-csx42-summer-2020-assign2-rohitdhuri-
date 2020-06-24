@@ -162,4 +162,9 @@ public class ChannelContext implements ContextI {
 
     }
 
+    @Override
+    public String toString(){
+        return "availableStates= " + availableStates + " videoData= " + videoData;
+    }
+
 }

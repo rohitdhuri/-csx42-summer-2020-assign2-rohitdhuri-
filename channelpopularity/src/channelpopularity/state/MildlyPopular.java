@@ -25,4 +25,10 @@ public class MildlyPopular extends AbstractState {
             result.storeOutput(c.getCurrentState() + "__AD_REQUEST::REJECTED" + "\n");
         }
     }
+
+    @Override
+    public String toString() {
+        return "Class: MildlyPopular, Data Members: [ ]";
+    }
+    
 }

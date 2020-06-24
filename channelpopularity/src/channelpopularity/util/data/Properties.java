@@ -11,7 +11,6 @@ public class Properties {
      */
 
     public int views, likes, dislikes, popularityScore;
-    public String name;
 
     /**
      * Constructor initializes the constants
@@ -45,4 +44,8 @@ public class Properties {
         this.popularityScore = views + 2 * (likes - dislikes);
     }
 
+    @Override
+    public String toString() {
+        return "Class: Properties, Data Members: [ views= " + views+ " likes= "+ likes+" dislikes= "+ dislikes + " popularityScore= "+ popularityScore+" ]";
+    }
 }

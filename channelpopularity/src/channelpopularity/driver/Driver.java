@@ -17,6 +17,8 @@ import channelpopularity.context.ChannelContext;
 import channelpopularity.context.ContextI;
 import channelpopularity.helper.Parser;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.InvalidPathException;
 import java.util.Arrays;
 
 /**
@@ -82,7 +84,8 @@ public class Driver {
 			fdi.writeToFile();
 
 		} catch (NegativeLikesOrDislikes | NegativeValueOfViews | VideoAlreadyExists | VideoNotFound
-				| EmptyFileException | InvalidInputFormat | NumberFormatException | FileNotFoundException e) {
+				| EmptyFileException | InvalidInputFormat | NumberFormatException | InvalidPathException
+				| SecurityException | IOException e) {
 			System.err.println(e.getMessage());
 		}
 	}

@@ -26,4 +26,9 @@ public class HighlyPopular extends AbstractState {
         }
     }
 
+    @Override
+    public String toString() {
+        return "Class: HighlyPopular, Data Members: [ ]";
+    }
+
 }

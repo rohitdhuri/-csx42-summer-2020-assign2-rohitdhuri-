@@ -23,6 +23,8 @@ public class Parser {
 
     FileProcessor fp;
     ContextI c;
+    private String values, vName, operation;
+    private Map<String, Integer> metricsValues;
 
     public Parser(FileProcessor inFp, ContextI inC) {
 
@@ -41,9 +43,11 @@ public class Parser {
         if (str == null) {
             throw new EmptyFileException("Input file is empty");
         }
+        if (str.contains(" ")) {
+            throw new InvalidInputFormat("Line in the input file does not follow the specified formats");
+        }
 
-        String values, vName, operation;
-        Map<String, Integer> metricsValues = new HashMap<String, Integer>();
+        metricsValues = new HashMap<String, Integer>();
 
         while (str != null) {
             String[] tokens = str.split("::");
@@ -76,8 +80,14 @@ public class Parser {
             } else if (operation.equals(Operation.REMOVE_VIDEO.getConstantValue())) {
                 c.removeVideo(tokens[1]);
             } else if (operation.equals(Operation.METRICS.getConstantValue())) {
+                if (!tokens[1].matches("\\[.*.\\]")) {
+                    throw new InvalidInputFormat("Line in the input file does not follow the specified formats");
+                }
                 values = tokens[1].substring(1, tokens[1].length() - 1);
                 String[] metricString = values.split(",");
+                if (metricString[0].contains(" ") || metricString[1].contains(" ")) {
+                    throw new InvalidInputFormat("Line in the input file does not follow the specified formats");
+                }
                 for (String p : metricString) {
                     String[] pairs = p.split("=");
                     metricsValues.put(pairs[0], Integer.parseInt(pairs[1]));
@@ -85,6 +95,9 @@ public class Parser {
                 c.metrics(vName, metricsValues.get("VIEWS"), metricsValues.get("LIKES"), metricsValues.get("DISLIKES"));
             } else if (operation.equals(Operation.AD_REQUEST.getConstantValue())) {
                 String[] pairs = tokens[1].split("=");
+                if (pairs[0].contains(" ") || pairs[1].contains(" ")) {
+                    throw new InvalidInputFormat("Line in the input file does not follow the specified formats");
+                }
                 c.adRequest(vName, Integer.parseInt(pairs[1]));
             } else {
                 throw new InvalidInputFormat("Line in the input file does not follow the specified formats");
@@ -92,5 +105,11 @@ public class Parser {
 
             str = fp.poll();
         }
+    }
+
+    @Override
+    public String toString() {
+        return " class: Parser, Data Members: [values= " + values + " vName= " + vName + " operation= " + operation
+                + " metricsValues= " + metricsValues + "]";
     }
 }
